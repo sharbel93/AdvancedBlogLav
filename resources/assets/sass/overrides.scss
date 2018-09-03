@@ -1,0 +1,85 @@
+.dropdown {
+ position: relative;
+    .dropdown-menu{
+        display: none;
+        position: absolute;
+        left:0;
+        top: 103%;
+        z-index: 1000;
+        background-color: white;
+        min-width: 200px;
+        text-align: left;
+        box-shadow: 0 0 1px rgba(57, 70, 78, .15), 0 20px 55px -8px rgba(57, 70, 78, .25);
+
+        li {
+            &.separator {
+                border-top: 1px solid #ccc;
+                margin: 5px 0;
+            }
+
+            &>a {
+                margin: 5px 0;
+                display:block;
+                padding: 5px 0 5px 15px;
+                    &.hover {
+                        background-color: whitesmoke;
+                    }
+                }
+        }
+    }
+}
+    .dropdown.is-aligned-right .dropdown-menu {
+        right: 0;
+        left:auto;
+    }
+
+    .dropdown.is-open .dropdown-menu {
+        display: block;
+
+    }
+
+
+    /* ========================================
+   =========== Nav Item Override ==========
+   ======================================== */
+ // I want the .nav-item design that comes from bulma,
+// but with <button> instead of <a>. This is the bulma
+// code but targeting <button> instead, plus a few
+// modifications to normalize the <button> css
+ button.navbar-item {
+    background-color: transparent;
+    border: none;
+    color: $text-light;
+     &:hover {
+      color: $link-hover;
+    }
+     // Modifiers
+    &.is-active {
+      color: $link-active;
+    }
+     &.is-tab {
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      padding-bottom: calc(0.75rem - 1px);
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: calc(0.75rem - 1px);
+    }
+     &:hover {
+      border-bottom-color: $primary;
+      border-top-color: transparent;
+    }
+     &.is-active {
+      border-bottom: 3px solid $primary;
+      color: $primary;
+      padding-bottom: calc(0.75rem - 3px);
+    }
+  }
+   .navbar-item img {
+    max-height: 2.8rem;
+  }
+   .nav {
+    height: 4.5rem;
+  }
+
+

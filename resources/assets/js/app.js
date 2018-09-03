@@ -8,9 +8,12 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+// window.Buefy = require('buefy');
 import Buefy from 'buefy';
 
-Vue.usse(Buefy);
+
+// Global variable
+// Vue.use(Buefy.default)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,6 +22,13 @@ Vue.usse(Buefy);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+var app = new Vue({
+    el: '#app',
+    data: {}
+});
+
+$(document).ready(function(e) {
+    $('button.dropdown').hover(function(e) {
+        $(this).toggleClass('is-open');
+    });
+});
