@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'AmGraceSolutions') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -25,6 +25,12 @@
     {{-- <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
     <!-- Buefy CSS -->
 <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css"> --}}
+
+{{-- <!-- Buefy CSS -->
+<link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+
+<!-- Buefy JavaScript -->
+<script src="https://unpkg.com/buefy"></script> --}}
 </head>
 <body>
     <div id="app">
@@ -61,9 +67,9 @@
                  <div class="navbar-end" style="overflow:visible">
                     <div class="navbar-item">
                             <div class="field is-grouped">
-                                    @if (!Auth::guest())
-                                    <a href="#" class="navbar-item is-tab">Login</a>
-                                    <a href="#" class="navbar-item is-tab">Join the Community</a>
+                                    @if (Auth::guest())
+                                    <a href="{{ route('login') }}" class="navbar-item is-tab">Login</a>
+                                    <a href="{{ route('register') }}" class="navbar-item is-tab">Join the Community</a>
                                     @else
 
                                        <button class="dropdown navbar-item is-aligned-right  is-tab" style="border:none; background-color:white;">Hey Sharbel <span class="icon"> <i class="fas fa-caret-down"></i> </span>
@@ -89,7 +95,9 @@
 
 
     </div>
-    {{-- <!-- Buefy JavaScript -->
-<script src="https://unpkg.com/buefy"></script> --}}
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+@yield('scripts')
+
 </body>
 </html>

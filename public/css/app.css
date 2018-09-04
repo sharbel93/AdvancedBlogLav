@@ -412,7 +412,7 @@ th {
 }
 
 html {
-  background-color: white;
+  background-color: whitesmoke;
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -19551,6 +19551,18 @@ readers do not read off random characters that represent icons */
 }
 
 /* ========================================
+   =========== Text Override ==========
+   ======================================== */
+
+.is-muted {
+  color: #b5b5b5 !important;
+}
+
+a.is-muted:hover {
+  color: #7a7a7a !important;
+}
+
+/* ========================================
    =========== Nav Item Override ==========
    ======================================== */
 
@@ -19589,7 +19601,7 @@ button.navbar-item.is-active {
 }
 
 .navbar-item img {
-  max-height: 2.8rem;
+  max-height: 3.9rem;
 }
 
 .nav {

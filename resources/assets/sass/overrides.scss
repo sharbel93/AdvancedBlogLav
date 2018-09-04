@@ -39,6 +39,19 @@
     }
 
 
+
+    /* ========================================
+   =========== Text Override ==========
+   ======================================== */
+   .is-muted{
+       color: $grey-light !important;
+   }
+
+   a.is-muted:hover {
+       color: $grey !important;
+   }
+
+
     /* ========================================
    =========== Nav Item Override ==========
    ======================================== */
@@ -76,7 +89,7 @@
     }
   }
    .navbar-item img {
-    max-height: 2.8rem;
+    max-height: 3.9rem;
   }
    .nav {
     height: 4.5rem;

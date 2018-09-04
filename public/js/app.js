@@ -991,8 +991,10 @@ window.Vue = __webpack_require__(34);
 // window.Buefy = require('buefy');
 
 
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a);
+
 // Global variable
-// Vue.use(Buefy.default)
+// Vue.use(Buefy.default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -1000,16 +1002,16 @@ window.Vue = __webpack_require__(34);
  */
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-var app = new Vue({
-    el: '#app',
-    data: {}
-});
+Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Checkbox.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Checkbox);
+// var app = new Vue({
+//     el: '#app',
+//     data: {}
+// });
 
 $(document).ready(function (e) {
-    $('button.dropdown').hover(function (e) {
-        $(this).toggleClass('is-open');
-    });
+  $('button.dropdown').hover(function (e) {
+    $(this).toggleClass('is-open');
+  });
 });
 
 /***/ }),
