@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('manage')->middleware('role:superadministration|administration|editor|author|contributor')->group(function() {
+    Route::get('/', 'ManageController@index');
+    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

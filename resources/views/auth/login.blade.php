@@ -41,7 +41,7 @@
                                             Remember Me
                                     </label>
                                 </div>
-                        <button class="button is-primary is-outlined is-fullwidth m-t-30">
+                        <button class="button is-success is-outlined is-fullwidth m-t-30">
                             Log In
                         </button>
                  </form>

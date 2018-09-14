@@ -10,7 +10,7 @@
 @import '~bulma/bulma';
 
 // fontawesome
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+//@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 // bulma vue modules
 @import '~buefy/src/scss/buefy';
@@ -23,6 +23,7 @@
 @import 'overrides';
 @import 'helpers';
 @import 'styles';
+@import 'manage';
 
 .navbar-laravel {
   background-color: #fff;

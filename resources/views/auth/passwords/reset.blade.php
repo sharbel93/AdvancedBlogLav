@@ -53,7 +53,7 @@
                                             </p>
 
                                                 @if ($errors->has('password_confirmation'))
-                                                <p class="help is-danger">
+                                                <p class="help is-success">
                                                       {{ $errors->first('password_confirmation') }}
                                                     </p>
                                                 @endif

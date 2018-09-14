@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AmGraceSolutions') }}</title>
+    <title>AmGraceSolutions - MANAGEMENT</title>
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -34,13 +34,12 @@
     @yield('styles')
 </head>
 <body>
-       @include('_includes.nav.main')
 
-    <div id="app">
+       @include('_includes.nav.main')
+        @include('_includes.nav.manage')
+       <div id="app">
         @yield('content')
     </div>
-
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')

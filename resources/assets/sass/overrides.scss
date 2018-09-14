@@ -1,6 +1,7 @@
 .dropdown {
  position: relative;
     .dropdown-menu{
+      background-color: white;
         display: none;
         position: absolute;
         left:0;
@@ -9,7 +10,8 @@
         background-color: white;
         min-width: 200px;
         text-align: left;
-        box-shadow: 0 0 1px rgba(57, 70, 78, .15), 0 20px 55px -8px rgba(57, 70, 78, .25);
+      box-shadow: 0 0 8px #777;
+        //box-shadow: 0 0 1px rgba(57, 70, 78, .15), 0 20px 55px -8px rgba(57, 70, 78, .25);
 
         li {
             &.separator {
