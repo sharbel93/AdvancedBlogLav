@@ -8,28 +8,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-// window.Buefy = require('buefy');
+import Vue from 'vue';
 import Buefy from 'buefy';
-
 Vue.use(Buefy);
 
-// Global variable
-// Vue.use(Buefy.default);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component(Buefy.Checkbox.name,  Buefy.Checkbox);
-// var app = new Vue({
-//     el: '#app',
-//     data: {}
+//
+// $(document).ready(function(e) {
+//     $('button.dropdown').hover(function(e) {
+//         $(this).toggleClass('is-open');
+//     });
 // });
-
-$(document).ready(function(e) {
-    $('button.dropdown').hover(function(e) {
-        $(this).toggleClass('is-open');
-    });
-});

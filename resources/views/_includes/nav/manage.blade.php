@@ -16,7 +16,7 @@
         </p>
         <ul class="menu-list">
             <li>
-                <a href="#">Manage Users</a>
+                <a href="{{route('users.index')}}">Manage Users</a>
             </li>
             <li>
                 <a href="#">

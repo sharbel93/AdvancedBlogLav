@@ -18,6 +18,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "buefy": "^0.6.6"
   }
 }
