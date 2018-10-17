@@ -19,7 +19,7 @@
                 <a href="{{route('users.index')}}">Manage Users</a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('permissions.index')}}">
                     Roles &amp; Permissions
                 </a>
             </li>

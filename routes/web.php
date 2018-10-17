@@ -20,6 +20,8 @@ Route::group(['prefix' => 'manage', 'middleware' =>
     Route::get('/', 'ManageController@index');
     Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
     Route::resource('/users', 'UserController');
+    Route::resource('/permissions', 'PermissionController', ['except' =>
+    'destroy']);
 });
 //Route::group(['prefix' => 'manage', 'middleware' =>
 //    ['role:superadministrator|administrator|editor|author|contributor']], function() {
@@ -27,10 +29,13 @@ Route::group(['prefix' => 'manage', 'middleware' =>
 //    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
 //    Route::resource('/users', 'UserController');
 //});
-//Route::prefix('manage')->middleware('role:superadministrator|administrator|editor|author|contributor')->group(function () {
+//Route::prefix('manage')->middleware('auth','role:superadministrator|administrator|editor|author|contributor')->group
+//(function () {
 //    Route::get('/', 'ManageController@index');
 //    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
 //    Route::resource('/users', 'UserController');
+//    Route::resource('/permissions', 'PermissionController', ['except' =>
+//        'destroy']);
 //});
 
 //Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
