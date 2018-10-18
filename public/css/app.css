@@ -20204,6 +20204,10 @@ button.navbar-item.is-active {
   padding-right: 100px !important;
 }
 
+.is-fullwidth {
+  width: 100%;
+}
+
 .side-menu {
   position: fixed;
   height: 100vh;
