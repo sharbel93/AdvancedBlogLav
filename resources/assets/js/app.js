@@ -13,9 +13,3 @@ import Buefy from 'buefy';
 Vue.use(Buefy);
 
 
-//
-// $(document).ready(function(e) {
-//     $('button.dropdown').hover(function(e) {
-//         $(this).toggleClass('is-open');
-//     });
-// });

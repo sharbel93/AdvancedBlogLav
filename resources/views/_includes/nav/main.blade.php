@@ -10,74 +10,74 @@
 </div> --}}
 
 <div class="navbar-brand">
-
-    <a class="navbar-item" href="{{ route('home') }}">
+    <a class="navbar-item is-paddingless" href="{{ route('home') }}">
         <img src="{{ asset('images/logo.png') }}" alt="amgrace logo" width="112" height="50" >
     </a>
-    <div class="navbar-burger burger" data-target="navbarTarget">
+    {{--<div class="navbar-burger burger" data-target="navbarTarget">--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+    {{--</div>--}}
+    <button class="button navbar-burger">
         <span></span>
         <span></span>
         <span></span>
-    </div>
+    </button>
 </div>
-<div id="navbarTarget" class="navbar-menu">
-    <div class="navbar-start">
-        <a href="" class="navbar-item is-tab is-hidden-mobile m-l-10">Learn</a>
-        <a href="" class="navbar-item is-tab is-hidden-mobile">Discuss</a>
-        <a href="" class="navbar-item is-tab is-hidden-mobile">Share</a>
-    </div>
 
+                 <div class="navbar-start">
+                     <a href="" class="navbar-item is-tab  is-active">Learn</a>
+                     <a href="" class="navbar-item is-tab ">Discuss</a>
+                     <a href="" class="navbar-item is-tab ">Share</a>
+                 </div>
+
+{{--<div id="navbarTarget" class="navbar-menu">--}}
+    {{--<div class="navbar-start">--}}
+        {{--<a href="" class="navbar-item is-tab is-hidden-mobile m-l-10">Learn</a>--}}
+        {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Discuss</a>--}}
+        {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Share</a>--}}
+    {{--</div>--}}
 
     <div class="navbar-end navbar-menu" style="overflow:visible">
-        <div class="navbar-item">
-            <div class="field is-grouped">
-                @if (Auth::guest())
+        {{--<div class="navbar-item">--}}
+
+                @guest
                     <a href="{{ route('login') }}" class="navbar-item is-tab">Login</a>
                     <a href="{{ route('register') }}" class="navbar-item is-tab">Join the Community</a>
                 @else
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">  Hey {{ Auth::user()->name }}</a>
 
-                    <button class="dropdown navbar-item is-aligned-right is-tab is-hoverable " style="border:none;
-                    background-color:white;">
-                        Hey {{ Auth::user()->name }}
-                        <span class="icon">
-                            <i class="fas fa-caret-down"></i>
-                        </span>
-                        <ul class="dropdown-menu has-dropdown " style="overflow: visible;">
-                            <li><a href="#">
-                                    <span class="icon"> <i class="fa fa-fw fa-user-circle  m-r-10  "></i> </span>  Profile</a></li>
-                            <li>
-                                <a href="#">
+                    <div class="navbar-dropdown is-right">
+                       <a href="#" class="navbar-item">
+                           <span class="icon"> <i class="fa fa-fw fa-user-circle  m-r-10  "></i>
+                           </span>Profile
+                       </a>
+                        <a href="#" class="navbar-item">
                                     <span class="icon">
                                         <i class="fa fa-fw   m-r-10 fa-bell"></i>
                                     </span> Notifications
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('manage.dashboard')}}">
+                        </a>
+                                <a href="{{route('manage.dashboard')}}" class="navbar-item">
                                     <span class="icon">
                                         <i class="fa fa-fw   m-r-10 fa-cog"></i>
                                     </span> Manage
                                 </a>
-                            </li>
-                            <li class="separator"></li>
-                            <li class="seperator"></li>
-                            <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                        <hr class="navbar-divider">
+                            <a href="{{route('logout')}}" class="navbar-item" onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
-                  <span class="icon">
-                    <i class="fa fa-fw fa-sign-out-alt m-r-5"></i>
-                  </span>
-                                    Logout
-                                </a>
+                          <span class="icon">
+                            <i class="fa fa-fw fa-sign-out-alt m-r-5"></i>
+                          </span>Logout
+                            </a>
                                 {{--@include('_includes.forms.logout')--}}
-                            </li>
                             {{--<li><a href="#">  <span class="icon"> <i class="fa fa-fw   m-r-10 fa-sign-out-alt"></i> </span> Logout</a></li>--}}
-                        </ul>
-                    </button>
-                @endif
-            </div>
+                    </div>
+                    </div>
+                @endguest
+        {{--</div>--}}
+
         </div>
-    </div>
-</div>
-</div>
-</div>
-</nav>
+        </div>
+        </div>
+        </nav>
