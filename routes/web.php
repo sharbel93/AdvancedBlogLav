@@ -24,6 +24,8 @@ Route::group(['prefix' => 'manage', 'middleware' =>
     'destroy']);
     Route::resource('/roles', 'RoleController', ['except' =>
     'destroy']);
+    Route::resource('/posts', 'PostController');
+
 });
 //Route::group(['prefix' => 'manage', 'middleware' =>
 //    ['role:superadministrator|administrator|editor|author|contributor']], function() {

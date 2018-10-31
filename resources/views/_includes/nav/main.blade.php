@@ -21,11 +21,17 @@
     </a>
     @endif
 
-    <div class="navbar-burger burger" data-target="navbarTarget">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    {{--<div class="navbar-burger burger" data-target="navbarTarget">--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+    {{--</div>--}}
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+       data-target="navbarTarget">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
 
     {{--<button class="button navbar-burger">--}}
         {{--<span></span>--}}
@@ -49,7 +55,7 @@
         {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Discuss</a>--}}
         {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Share</a>--}}
         <a href="" class="navbar-item is-tab  is-active">Learn</a>
-        <a href="" class="navbar-item is-tab ">Discuss</a>
+        <a href="" class="navbar-item is-tab ">Discuss </a>
         <a href="" class="navbar-item is-tab ">Share</a>
     </div>
 
@@ -57,8 +63,10 @@
         {{--<div class="navbar-item">--}}
 
                 @guest
-                    <a href="{{ route('login') }}" class="navbar-item is-tab">Login</a>
-                    <a href="{{ route('register') }}" class="navbar-item is-tab">Join the Community</a>
+                    <a href="{{ route('login') }}" class="navbar-item ">Login</a>
+                    <a href="{{ route('register') }}" class="navbar-item ">Join the Community</a>
+                  {{--<a href="{{ route('login') }}" class="navbar-item is-tab">Login</a>--}}
+                    {{--<a href="{{ route('register') }}" class="navbar-item is-tab">Join the Community</a>--}}
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">  Hey {{ Auth::user()->name }}</a>
@@ -79,8 +87,9 @@
                                     </span> Manage
                                 </a>
                         <hr class="navbar-divider">
-                            <a href="{{route('logout')}}" class="navbar-item" onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
+                            <a href="{{route('logout')}}" class="navbar-item"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
                           <span class="icon">
                             <i class="fa fa-fw fa-sign-out-alt m-r-5"></i>
                           </span>Logout
@@ -96,3 +105,4 @@
         </div>
         </div>
         </nav>
+

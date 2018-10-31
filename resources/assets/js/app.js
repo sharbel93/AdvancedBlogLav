@@ -14,3 +14,4 @@ Vue.use(Buefy);
 
 
  require('./manage');
+
