@@ -13,3 +13,4 @@ import Buefy from 'buefy';
 Vue.use(Buefy);
 
 
+ require('./manage');

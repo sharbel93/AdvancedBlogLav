@@ -7,14 +7,14 @@
 @import 'variables';
 
 // Bulma
-@import '~bulma/bulma';
+@import '~bulma/bulma.sass';
 
 // fontawesome
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-
+//@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 // bulma vue modules
-@import '~buefy/src/scss/buefy';
+@import '~buefy/src/scss/buefy.scss';
 // @import '~buefy/lib/buefy.css';
 
 // Bootstrap

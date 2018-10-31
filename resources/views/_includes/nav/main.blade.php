@@ -10,33 +10,48 @@
 </div> --}}
 
 <div class="navbar-brand">
-    <a class="navbar-item is-paddingless" href="{{ route('home') }}">
+    <a class="navbar-item is-paddingless brand-item" href="{{ route('home') }}">
         <img src="{{ asset('images/logo.png') }}" alt="amgrace logo" width="112" height="50" >
     </a>
-    {{--<div class="navbar-burger burger" data-target="navbarTarget">--}}
-        {{--<span></span>--}}
-        {{--<span></span>--}}
-        {{--<span></span>--}}
-    {{--</div>--}}
-    <button class="button navbar-burger">
+
+    @if (Request::segment(1) == "manage")
+
+    <a class="navbar-item is-hidden-desktop"  id="admin-slideout-button">
+        <span class="icon"><i class="fa fa-arrow-circle-right"></i></span>
+    </a>
+    @endif
+
+    <div class="navbar-burger burger" data-target="navbarTarget">
         <span></span>
         <span></span>
         <span></span>
-    </button>
+    </div>
+
+    {{--<button class="button navbar-burger">--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+    {{--</button>--}}
 </div>
+             {{--<div class="navbar-menu">--}}
+                 {{----}}
+             {{--</div>--}}
 
-                 <div class="navbar-start">
-                     <a href="" class="navbar-item is-tab  is-active">Learn</a>
-                     <a href="" class="navbar-item is-tab ">Discuss</a>
-                     <a href="" class="navbar-item is-tab ">Share</a>
-                 </div>
+                 {{--<div class="navbar-start">--}}
+                     {{--<a href="" class="navbar-item is-tab  is-active">Learn</a>--}}
+                     {{--<a href="" class="navbar-item is-tab ">Discuss</a>--}}
+                     {{--<a href="" class="navbar-item is-tab ">Share</a>--}}
+                 {{--</div>--}}
 
-{{--<div id="navbarTarget" class="navbar-menu">--}}
-    {{--<div class="navbar-start">--}}
+<div id="navbarTarget" class="navbar-menu">
+    <div class="navbar-start">
         {{--<a href="" class="navbar-item is-tab is-hidden-mobile m-l-10">Learn</a>--}}
         {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Discuss</a>--}}
         {{--<a href="" class="navbar-item is-tab is-hidden-mobile">Share</a>--}}
-    {{--</div>--}}
+        <a href="" class="navbar-item is-tab  is-active">Learn</a>
+        <a href="" class="navbar-item is-tab ">Discuss</a>
+        <a href="" class="navbar-item is-tab ">Share</a>
+    </div>
 
     <div class="navbar-end navbar-menu" style="overflow:visible">
         {{--<div class="navbar-item">--}}
@@ -75,7 +90,7 @@
                     </div>
                     </div>
                 @endguest
-        {{--</div>--}}
+        </div>
 
         </div>
         </div>
