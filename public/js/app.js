@@ -11933,7 +11933,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
@@ -11960,7 +11960,7 @@ window.Vue = __webpack_require__(3);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_buefy___default.a);
 
-__webpack_require__(42);
+__webpack_require__(37);
 
 /***/ }),
 /* 12 */
@@ -42562,16 +42562,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /* 37 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
-/***/ (function(module, exports) {
-
 
 
 var accordions = document.getElementsByClassName('has-submenu');
@@ -42647,6 +42637,12 @@ for (var i = 0; i < accordions.length; i++) {
 //         }
 //     }
 // }
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

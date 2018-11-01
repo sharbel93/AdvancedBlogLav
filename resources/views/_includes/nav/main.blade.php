@@ -94,7 +94,7 @@
                             <i class="fa fa-fw fa-sign-out-alt m-r-5"></i>
                           </span>Logout
                             </a>
-                                {{--@include('_includes.forms.logout')--}}
+                                @include('_includes.forms.logout')
                             {{--<li><a href="#">  <span class="icon"> <i class="fa fa-fw   m-r-10 fa-sign-out-alt"></i> </span> Logout</a></li>--}}
                     </div>
                     </div>

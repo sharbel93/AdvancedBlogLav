@@ -39,10 +39,10 @@
         @include('_includes.nav.manage')
        <div class="management-area" id="app">
         @yield('content')
-    </div>
+       </div>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-@yield('scripts')
+    <script src="{{ asset('js/app.js') }}" ></script>
+     @yield('scripts')
 
 </body>
 </html>
