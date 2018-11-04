@@ -32,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('manage.users.create');
+        $roles = Role::all();
+        return view('manage.users.create')->withRoles($roles);
     }
 
     /**
