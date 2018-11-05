@@ -63,17 +63,19 @@
         },
         data: function() {
             return {
-                slug: this.convertTitle(),
+                // slug: this.convertTitle(),
+                slug: this.setSlug(this.title),
                 isEditing: false,
                 customSlug: '',
-                wasEdited: false
+                wasEdited: false,
+                api_token: this.$root.api_token
             }
         },
         // mounted() {  },
          methods: {
-             convertTitle: function() {
-                 return Slug(this.title)
-             },
+             // convertTitle: function() {
+             //     return Slug(this.title)
+             // },
              editSlug: function() {
                  this.customSlug = this.slug;
                  // this.$emit('edit-custom-slug', this.slug);
@@ -83,26 +85,61 @@
                  if(this.customSlug !== this.slug){
                      this.wasEdited = true;
                  }
-                 this.slug = Slug(this.customSlug);
+                 // this.slug = Slug(this.customSlug);
+                 this.setSlug(this.customSlug);
                  // this.$emit('save-custom-slug', this.slug);
                  this.isEditing = false;
              },
              resetEditing: function() {
-                 this.slug = this.convertTitle();
+                 // this.slug = this.convertTitle();
+                 this.setSlug(this.title);
                  // this.$emit('reset-custom-slug', this.slug);
                  this.wasEdited = false;
                  this.isEditing = false;
+             },
+             setSlug: function(newVal, count = 0) {
+                 //Slugify the newVal
+                 let slug = Slug(newVal + (count > 0 ? `-${count}` : ''));
+                 let vm = this;
+                 // test to see if unique
+                 if (this.api_token && slug) {
+                     axios.get('/api/posts/unique', {
+                         params: {
+                             api_token: vm.api_token,
+                             slug: slug
+
+                         }
+                     }).then(function (response){
+                         // if unique, then set the slug and emit event
+                         if (response.data) {
+                             vm.slug = slug;
+                             vm.$emit('slug-changed', slug);
+                         } else {
+                             // if not, customize the slug to make it uique and test again
+                             vm.setSlug(newVal, count+1)
+                         }
+
+                     }).catch(function (error){
+                         console.log(error);
+                     });
+                 }
+
+
              }
          },
         watch: {
             title: _.debounce(function() {
                 if(this.wasEdited === false) {
-                     this.slug =this.convertTitle()
+                     // this.slug =this.convertTitle()
+                    this.setSlug(this.title);
                 }
-                 }, 250),
-            slug: function(val) {
-                this.$emit('slug-changed', this.slug)
-            }
+                // run ajax to see if slug is unique
+                //if not unique, customize the slug to make it unique
+                 }, 250)
+            // ,
+            // slug: function(val) {
+            //     this.$emit('slug-changed', this.slug)
+            // }
         }
     }
 </script>
