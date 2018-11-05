@@ -1,9 +1,9 @@
 @extends('layouts.manage')
 @section('content')
     <div class="flex-container">
-        <div class="columns m-t-10">
+        <div class="columns m-t-10 m-b-0">
             <div class="column">
-                <h1 class="title">Add New Blog Post</h1>
+                <h1 class="title is-admin is-4">Add New Blog Post</h1>
             </div>
             <div class="column">
                 {{--<a href="{{route('posts.create')}}" class="button is-primary is-pulled-right">--}}
@@ -11,17 +11,17 @@
                 {{--</a>--}}
             </div>
         </div>
-        <hr>
+        <hr class="m-t-0">
 
         <form action="{{route('posts.store')}}" method="post">
             {{ csrf_field()}}
             <div class="columns">
-                <div class="column is-three-quarters-desktop">
+                <div class="column is-three-quarters-desktop is-three-quarters-tablet">
                     <b-field>
                         <b-input  type="text" placeholder="Post Title" size="is-large" v-model="title"></b-input>
                     </b-field>
 
-                   <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title"
+                   <slug-widget url="{{url('/')}}" subdirectory="blog" :title="title" @copied="slugCopied"
                                 @slug-changed="updateSlug"></slug-widget>
                     <input type="hidden " v-model="slug" name="slug">
                     {{--<b-field>--}}
@@ -57,7 +57,7 @@
                                     <i class="fas fa-clipboard-list fa-2x"></i>
                                 </div>
                                 <div class="status-details">
-                                    <h4>Draft</h4>
+                                    <h4> <span class="status-emphasis">Draft</span>Saved</h4>
                                     <p>A Few Minutes Ago </p>
                                 </div>
 
@@ -97,6 +97,9 @@
       methods: {
           updateSlug: function(val) {
               this.slug = val;
+          },
+          slugCopied: function(type,msg, val) {
+              notifications.toast(msg, {type: `is-${type}`});
           }
       }
   });

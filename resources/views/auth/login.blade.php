@@ -35,12 +35,13 @@
                                     </p>
                                 @endif
                         </div>
-                                <div class="field m-t-20">
-                                    <label class="checkbox">
-                                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                            Remember Me
-                                    </label>
-                                </div>
+                                {{--<div class="field m-t-20">--}}
+                                    {{--<label class="checkbox">--}}
+                                            {{--<input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
+                                            {{--Remember Me--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                     <b-checkbox name="remember" class="m-t-20">Remember Me</b-checkbox>
                         <button class="button is-success is-outlined is-fullwidth m-t-30">
                             Log In
                         </button>
@@ -127,16 +128,9 @@
 @endsection
 
 @section('scripts')
-
   <script>
-
-
     var app = new Vue({
       el: '#app'
     });
-
-
   </script>
-
-
 @endsection

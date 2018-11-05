@@ -42,6 +42,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+       @include('_includes.notifications.toast')
         @yield('scripts')
 
 </body>

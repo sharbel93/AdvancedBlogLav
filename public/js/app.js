@@ -42649,7 +42649,7 @@ exports = module.exports = __webpack_require__(40)(false);
 
 
 // module
-exports.push([module.i, "\n.slug-widget[data-v-04f472b4]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.wrapper[data-v-04f472b4]{\n      margin-left: 8px;\n}\n.slug[data-v-04f472b4] {\n      background-color: #fdfd96;\n      padding: 3px 5px;\n}\n.input[data-v-04f472b4] {\n      width:auto;\n}\n.url-wrapper[data-v-04f472b4] {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      height: 28px;\n}\n", ""]);
+exports.push([module.i, "\n.slug-widget[data-v-04f472b4]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.wrapper[data-v-04f472b4]{\n      margin-left: 8px;\n}\n.slug[data-v-04f472b4] {\n      background-color: #fdfd96;\n      padding: 3px 5px;\n}\n.input[data-v-04f472b4] {\n      width:auto;\n}\n.url-wrapper[data-v-04f472b4] {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      height: 28px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n}\n#slug-editor[data-v-04f472b4] {\n    min-width: 142px;\n    max-width: 300px;\n}\n\n", ""]);
 
 // exports
 
@@ -43159,6 +43159,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -43173,6 +43193,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         title: {
             type: String,
             required: true
+        },
+        icon: {
+            type: String,
+            default: "fa fa-link"
         }
     },
     data: function data() {
@@ -43190,10 +43214,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // convertTitle: function() {
         //     return Slug(this.title)
         // },
+        adjustWidth: function adjustWidth(event) {
+            var val = event.target.value;
+            var key = event.key;
+            if (key === "Escape") {
+                event.preventDefault();
+                this.cancelEditing();
+            } else if (key === "Enter") {
+                event.preventDefault();
+                this.saveSlug();
+            } else {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                ctx.font = "14px sans-serif";
+                document.getElementById('slug-editor').style.width = Math.ceil(ctx.measureText(val).width + 25) + "px";
+            }
+        },
         editSlug: function editSlug() {
             this.customSlug = this.slug;
-            // this.$emit('edit-custom-slug', this.slug);
+            this.$emit('edit', this.slug);
             this.isEditing = true;
+            // must set timeout to wait for the thread to become available
+            window.setTimeout(function () {
+                document.getElementById('slug-editor').focus();
+            }, 0);
         },
         saveSlug: function saveSlug() {
             if (this.customSlug !== this.slug) {
@@ -43201,13 +43245,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             // this.slug = Slug(this.customSlug);
             this.setSlug(this.customSlug);
-            // this.$emit('save-custom-slug', this.slug);
+            this.$emit('save', this.slug);
             this.isEditing = false;
         },
         resetEditing: function resetEditing() {
             // this.slug = this.convertTitle();
             this.setSlug(this.title);
-            // this.$emit('reset-custom-slug', this.slug);
+            this.$emit('reset', this.slug);
             this.wasEdited = false;
             this.isEditing = false;
         },
@@ -43215,7 +43259,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
             //Slugify the newVal
-            var slug = Slug(newVal + (count > 0 ? '-' + count : ''));
+            if (newVal === '') return '';
+            var slug = Slug(newVal + (count > 0 ? "-" + count : ''));
             var vm = this;
             // test to see if unique
             if (this.api_token && slug) {
@@ -43238,7 +43283,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(error);
                 });
             }
+        },
+        copyToClipboard: function copyToClipboard(val) {
+            var temp = document.createElement('textarea');
+            temp.value = val;
+            document.body.appendChild(temp);
+            temp.select();
+            try {
+                var success = document.execCommand('copy');
+                var type = success ? 'success' : 'warning';
+                var msg = success ? "Copied to ClipBoard: " + val : "Copy failed, your browser may not support this feature";
+                this.$emit('copied', type, msg, val);
+                console.log("Copied to CLipboard: ", val);
+            } catch (err) {
+                this.$emit('copy-failed', val);
+                console.log("Copy failed, your browser may not support this feature");
+                console.log("Attempted to copy: ", val);
+            }
+            document.body.removeChild(temp);
         }
+    },
+    computed: {
+
+        urlSanitized: function urlSanitized() {
+            return this.url.replace(/^\/|\/$/g, '');
+        },
+        subdirectorySanitized: function subdirectorySanitized() {
+            return this.subdirectory.replace(/^\/|\/$/g, '');
+        },
+        fullUrl: function fullUrl() {
+            return this.urlSanitized + "/" + this.subdirectorySanitized + "/" + this.slug;
+        }
+
     },
     watch: {
         title: _.debounce(function () {
@@ -43265,12 +43341,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "slug-widget" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "icon-wrapper wrapper" }, [
+      _c("i", { class: _vm.icon })
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "url-wrapper wrapper" }, [
-      _c("span", { staticClass: "root-url" }, [_vm._v(_vm._s(_vm.url))]),
+      _c("span", { staticClass: "root-url" }, [
+        _vm._v(_vm._s(_vm.urlSanitized))
+      ]),
       _c("span", { staticClass: "subdirectory-url" }, [
-        _vm._v("/" + _vm._s(_vm.subdirectory) + "/")
+        _vm._v("/" + _vm._s(_vm.subdirectorySanitized) + "/")
       ]),
       _c(
         "span",
@@ -43283,134 +43363,225 @@ var render = function() {
               expression: "slug && !isEditing"
             }
           ],
-          staticClass: "slug"
+          staticClass: "slug",
+          attrs: { title: _vm.slug }
         },
         [_vm._v(_vm._s(_vm.slug))]
       ),
-      _c(
-        "span",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isEditing,
-              expression: "isEditing"
+      _c("input", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isEditing,
+            expression: "isEditing"
+          },
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.customSlug,
+            expression: "customSlug"
+          }
+        ],
+        staticClass: "input is-small",
+        attrs: { type: "text", name: "slug", id: "slug-editor" },
+        domProps: { value: _vm.customSlug },
+        on: {
+          keyup: _vm.adjustWidth,
+          keydown: [
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+              ) {
+                return null
+              }
+              $event.preventDefault()
+            },
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              $event.preventDefault()
             }
           ],
-          staticClass: "slug-edit"
-        },
-        [
-          _c("input", {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.customSlug = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "button-wrapper wrapper" },
+      [
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.isEditing,
+                expression: "!isEditing"
+              }
+            ],
+            staticClass: "save-slug-button button is-small",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.editSlug($event)
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.slug.length < 1 ? "Create New Slug" : "Edit"))]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-dropdown",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.isEditing && _vm.slug.length > 1,
+                expression: "!isEditing && slug.length > 1"
+              }
+            ],
+            attrs: { hoverable: "" }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "save-slug-button button is-small",
+                attrs: { slot: "trigger" },
+                slot: "trigger"
+              },
+              [
+                _c("span", [_vm._v("Actions")]),
+                _vm._v(" "),
+                _c("b-icon", { attrs: { icon: "arrow_drop_down" } })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-dropdown-item",
+              {
+                staticStyle: { "font-size": "0.8em" },
+                on: {
+                  click: function($event) {
+                    _vm.copyToClipboard(_vm.fullUrl)
+                  }
+                }
+              },
+              [
+                _c("b-icon", {
+                  attrs: { icon: "content_copy", size: "is-small" }
+                }),
+                _vm._v(" Copy Full Url")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-dropdown-item",
+              {
+                staticStyle: { "font-size": "0.8em" },
+                on: {
+                  click: function($event) {
+                    _vm.copyToClipboard(_vm.slug)
+                  }
+                }
+              },
+              [
+                _c("b-icon", {
+                  attrs: { icon: "content_copy", size: "is-small" }
+                }),
+                _vm._v(" Copy Slug")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-dropdown-item",
+              {
+                staticStyle: { "font-size": "0.8em" },
+                attrs: { "has-link": "" }
+              },
+              [
+                _c(
+                  "a",
+                  { attrs: { href: _vm.fullUrl, target: "_blank" } },
+                  [
+                    _c("b-icon", { attrs: { icon: "link", size: "is-small" } }),
+                    _vm._v("\n                    Visit Url\n                ")
+                  ],
+                  1
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
             directives: [
               {
                 name: "show",
                 rawName: "v-show",
                 value: _vm.isEditing,
                 expression: "isEditing"
-              },
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.customSlug,
-                expression: "customSlug"
               }
             ],
-            staticClass: "input is-small",
-            attrs: { type: "text", name: "slug" },
-            domProps: { value: _vm.customSlug },
+            staticClass: "save-slug-button button is-small",
             on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.customSlug = $event.target.value
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.saveSlug($event)
               }
             }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "button-wrapper wrapper" }, [
-      _c(
-        "button",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isEditing,
-              expression: "!isEditing "
+          },
+          [_vm._v("Save")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isEditing,
+                expression: "isEditing"
+              }
+            ],
+            staticClass: "save-slug-button button is-small",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.resetEditing($event)
+              }
             }
-          ],
-          staticClass: "save-slug-button button is-small",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.editSlug($event)
-            }
-          }
-        },
-        [_vm._v("Edit\n        ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isEditing,
-              expression: "isEditing"
-            }
-          ],
-          staticClass: "save-slug-button button is-small",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.saveSlug($event)
-            }
-          }
-        },
-        [_vm._v("Save")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isEditing,
-              expression: "isEditing"
-            }
-          ],
-          staticClass: "save-slug-button button is-small",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.resetEditing($event)
-            }
-          }
-        },
-        [_vm._v("Reset\n        ")]
-      )
-    ])
+          },
+          [_vm._v("Reset\n        ")]
+        )
+      ],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon-wrapper wrapper" }, [
-      _c("i", { staticClass: "fa fa-link" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
