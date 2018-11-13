@@ -17,5 +17,5 @@ import Buefy from 'buefy';
 Vue.use(Buefy);
 Vue.component('slugWidget', require('./components/slugWidget.vue'));
 
- require('./manage');
+require('./manage');
 
